@@ -21,3 +21,6 @@ yarn-error.log
 # for python
 __pycache__
 *.pyc
+
+# for vscode
+.vscode

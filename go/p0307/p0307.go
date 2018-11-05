@@ -88,6 +88,8 @@ func (this *NumArray) SumRange(i int, j int) int {
 	return sum(j+1, this.sums) - sum(i, this.sums)
 }
 
+// TODO: 线段树解法
+
 /**
  * Your NumArray object will be instantiated and called as such:
  * obj := Constructor(nums);

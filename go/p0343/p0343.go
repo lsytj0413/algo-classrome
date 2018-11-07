@@ -14,6 +14,10 @@
 
 package p0343
 
+import (
+	"math"
+)
+
 // TODO: 公式解法
 func integerBreak(n int) int {
 	_f1 := func(n int) int {
@@ -37,5 +41,21 @@ func integerBreak(n int) int {
 	}
 	_ = _f1
 
-	return _f1(n)
+	_f2 := func(n int) int {
+		switch {
+		case n == 2:
+			return 1
+		case n == 3:
+			return 2
+		case n%3 == 0:
+			return int(math.Pow(float64(3), float64(n/3)))
+		case n%3 == 1:
+			return 2 * 2 * int(math.Pow(float64(3), float64((n-4)/3)))
+		default:
+			return 2 * int(math.Pow(float64(3), float64((n-2)/3)))
+		}
+	}
+	_ = _f2
+
+	return _f2(n)
 }

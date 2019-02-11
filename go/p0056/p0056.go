@@ -16,39 +16,16 @@ package p0056
 
 import (
 	"sort"
+
+	"github.com/lsytj0413/algo-classrome/go/comm"
 )
 
 // Interval is a struct with start and end point
-type Interval struct {
-	Start int
-	End   int
-}
+type Interval = comm.Interval
 
 // Intervals for sort
-type Intervals []Interval
+type Intervals = comm.Intervals
 
-// Len for sort.Interface
-func (p Intervals) Len() int {
-	return len(p)
-}
-
-// Swap for sort.Interface
-func (p Intervals) Swap(i, j int) {
-	p[i], p[j] = p[j], p[i]
-}
-
-// Less for sort.Interface
-func (p Intervals) Less(i, j int) bool {
-	return p[i].Start < p[j].Start
-}
-
-/**
- * Definition for an interval.
- * type Interval struct {
- *	   Start int
- *	   End   int
- * }
- */
 func merge(intervals []Interval) []Interval {
 	// 假设 inervals 是有序的, 这个假设条件不成立...
 	ret, w := make([]Interval, len(intervals)), 0

@@ -24,3 +24,6 @@ __pycache__
 
 # vscode
 .vscode
+
+# for rust
+target

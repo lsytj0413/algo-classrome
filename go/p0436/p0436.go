@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0056
+package p0436
 
 import (
 	"sort"
@@ -23,33 +23,29 @@ import (
 // Interval is a struct with start and end point
 type Interval = comm.Interval
 
-// Intervals for sort
-type Intervals = comm.Intervals
-
-func merge(intervals []Interval) []Interval {
-	// 假设 inervals 是有序的, 这个假设条件不成立...
-	ret, w := make([]Interval, len(intervals)), 0
-
-	sort.Sort(Intervals(intervals))
-
-	if 0 == len(intervals) {
-		return ret
+// TODO: binary-search and rb-tree
+func findRightInterval(intervals []Interval) []int {
+	r := make([]int, 0, len(intervals))
+	indexes := make(map[int]int, len(intervals))
+	for i, v := range intervals {
+		r = append(r, v.End)
+		indexes[v.Start] = i
 	}
 
-	last := intervals[0]
-	for i := 1; i < len(intervals); i++ {
-		if intervals[i].Start <= last.End {
-			if intervals[i].End > last.End {
-				last.End = intervals[i].End
+	sort.Slice(intervals, func(i int, j int) bool {
+		return intervals[i].Start < intervals[j].Start
+	})
+
+	for i := 0; i < len(r); i++ {
+		v := -1
+		for j := 0; j < len(intervals); j++ {
+			if intervals[j].Start >= r[i] {
+				v = indexes[intervals[j].Start]
+				break
 			}
-		} else {
-			ret[w] = last
-			w++
-			last = intervals[i]
 		}
+		r[i] = v
 	}
-	ret[w] = last
-	w++
 
-	return ret[0:w]
+	return r
 }

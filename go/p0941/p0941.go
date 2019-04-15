@@ -1,0 +1,38 @@
+// Copyright (c) 2018 soren yang
+//
+// Licensed under the MIT License
+// you may not use this file except in complicance with the License.
+// You may obtain a copy of the License at
+//
+//     https://opensource.org/licenses/MIT
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+
+package p0941
+
+func validMountainArray(A []int) bool {
+	if len(A) < 3 || A[0] >= A[1] {
+		return false
+	}
+
+	state := 1
+	for i := 0; i < len(A)-1; i++ {
+		switch state {
+		case 1:
+			if A[i] > A[i+1] {
+				state = 2
+			} else if A[i] == A[i+1] {
+				return false
+			}
+		case 2:
+			if A[i] <= A[i+1] {
+				return false
+			}
+		}
+	}
+	return state == 2
+}

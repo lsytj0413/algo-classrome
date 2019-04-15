@@ -17,7 +17,7 @@ package p0257
 import (
 	"fmt"
 
-	"github.com/lsytj0413/algo-classrome/go/comm"
+	"algo/comm"
 )
 
 // TreeNode is binary tree node

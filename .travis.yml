@@ -4,20 +4,15 @@ before_install: true
 install: true
 before_script:
   - cd "${TRAVIS_BUILD_DIR}/go"
-  - export GO15VENDOREXPERIMENT=1
-  - go get -u github.com/golang/dep/cmd/dep
 script:
-  - dep ensure -v
-  - go test -timeout 30s ./...
-
+  - go test -mod=vendor -timeout 30s ./...
+env:
+  - GO111MODULE=on
 matrix:
   include:
     - language: go
       go:
-      - "1.10"
-    - language: go
-      go:
-      - "1.11"
+      - "1.12"
     - language: python
       python:
       - "2.7"

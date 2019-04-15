@@ -14,7 +14,9 @@
 
 package p0101
 
-import "github.com/lsytj0413/algo-classrome/go/comm"
+import (
+	"algo/comm"
+)
 
 // TreeNode is binary tree node
 type TreeNode = comm.TreeNode

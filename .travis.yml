@@ -12,9 +12,6 @@ matrix:
   include:
     - language: go
       go:
-      - "1.11"
-    - language: go
-      go:
       - "1.12"
     - language: python
       python:

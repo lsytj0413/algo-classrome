@@ -17,7 +17,7 @@ package p0436
 import (
 	"sort"
 
-	"github.com/lsytj0413/algo-classrome/go/comm"
+	"algo/comm"
 )
 
 // Interval is a struct with start and end point

@@ -15,7 +15,7 @@
 package p0110
 
 import (
-	"github.com/lsytj0413/algo-classrome/go/comm"
+	"algo/comm"
 )
 
 // TreeNode ...

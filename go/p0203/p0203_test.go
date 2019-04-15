@@ -13,9 +13,9 @@ package p0203
 import (
 	"testing"
 
-	"github.com/lsytj0413/algo-classrome/go/comm"
-
 	"github.com/stretchr/testify/suite"
+
+	"algo/comm"
 )
 
 type result struct {

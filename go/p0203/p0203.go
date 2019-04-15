@@ -15,7 +15,7 @@
 package p0203
 
 import (
-	"github.com/lsytj0413/algo-classrome/go/comm"
+	"algo/comm"
 )
 
 // ListNode for singly-linked list

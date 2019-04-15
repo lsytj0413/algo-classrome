@@ -12,7 +12,7 @@ package p0563
 
 import (
 	"testing"
-	
+
 	"github.com/stretchr/testify/suite"
 
 	"algo/comm"

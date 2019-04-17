@@ -14,7 +14,9 @@
 
 package p0007
 
-import "math"
+import (
+	"math"
+)
 
 func reverse(x int) (num int) {
 	for x != 0 {
@@ -25,5 +27,6 @@ func reverse(x int) (num int) {
 	if num > math.MaxInt32 || num < math.MinInt32 {
 		return 0
 	}
+
 	return
 }

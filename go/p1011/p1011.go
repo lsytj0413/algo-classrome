@@ -33,21 +33,33 @@ func shipWithinDays(weights []int, D int) int {
 		for i := 0; i < len(weights); i++ {
 			if now+weights[i] <= ship {
 				now += weights[i]
-			} else {
+			} else if weights[i] <= ship {
 				now = weights[i]
 				v++
+			} else {
+				return false
+			}
+
+			if v > D {
+				return false
 			}
 		}
 
-		return v <= D
+		return true
 	}
 
-	for res < sum {
+	min, max, res := res, sum, 0
+	for min < max {
+		res = (min + max) / 2
 		if _can(weights, res, D) {
-			return res
+			max = res - 1
+		} else {
+			min = res + 1
 		}
-		res++
 	}
 
-	return sum
+	if _can(weights, max, D) {
+		return max
+	}
+	return max + 1
 }

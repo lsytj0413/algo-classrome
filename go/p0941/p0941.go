@@ -12,21 +12,27 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0941
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+func validMountainArray(A []int) bool {
+	if len(A) < 3 || A[0] >= A[1] {
+		return false
 	}
 
-	return
+	state := 1
+	for i := 0; i < len(A)-1; i++ {
+		switch state {
+		case 1:
+			if A[i] > A[i+1] {
+				state = 2
+			} else if A[i] == A[i+1] {
+				return false
+			}
+		case 2:
+			if A[i] <= A[i+1] {
+				return false
+			}
+		}
+	}
+	return state == 2
 }

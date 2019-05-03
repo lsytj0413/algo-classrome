@@ -12,21 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0898
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+func subarrayBitwiseORs(A []int) int {
+	xor := make([]int, len(A))
+	xor[0] = A[0]
+	sets := map[int]bool{}
+	for _, v := range A {
+		sets[v] = true
 	}
 
-	return
+	for i := 1; i < len(A); i++ {
+		xor[i] = A[i]
+		sets[xor[i]] = true
+		for j := i - 1; j >= 0; j-- {
+			v := A[i] | xor[j]
+			if v == xor[j] {
+				break
+			}
+
+			xor[j] = v
+			sets[v] = true
+		}
+	}
+
+	return len(sets)
 }

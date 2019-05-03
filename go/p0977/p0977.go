@@ -12,21 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0977
 
-import (
-	"math"
-)
+func sortedSquares(A []int) []int {
+	r := make([]int, len(A))
+	w := len(r) - 1
+	i, j := 0, len(A)-1
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+	_abs := func(x int) int {
+		if x < 0 {
+			return 0 - x
+		}
+		return x
 	}
 
-	return
+	for w >= 0 {
+		vi, vj := _abs(A[i]), _abs(A[j])
+		if vi < vj {
+			r[w] = vj * vj
+			j--
+		} else {
+			r[w] = vi * vi
+			i++
+		}
+		w--
+	}
+
+	return r
 }

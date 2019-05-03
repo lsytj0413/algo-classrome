@@ -12,21 +12,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0914
 
-import (
-	"math"
-)
+import "sort"
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+// TODO: optimize the arr
+func hasGroupsSizeX(deck []int) bool {
+	if len(deck) < 2 {
+		return false
 	}
 
-	return
+	counts := make(map[int]int)
+	for _, v := range deck {
+		counts[v]++
+	}
+
+	arr := make([]int, 0, len(counts))
+	for _, v := range counts {
+		arr = append(arr, v)
+	}
+	sort.Ints(arr)
+
+	min := arr[0]
+	if min <= 1 {
+		return false
+	}
+	arr = arr[1:]
+
+	for i := 2; i <= min; i++ {
+		canGroup := true
+		for _, v := range arr {
+			if v%i != 0 {
+				canGroup = false
+				break
+			}
+		}
+		if canGroup {
+			return true
+		}
+	}
+
+	return false
 }

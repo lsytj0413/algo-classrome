@@ -12,21 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p1014
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
+func maxScoreSightseeingPair(A []int) int {
+	if len(A) < 2 {
 		return 0
 	}
 
-	return
+	max, res := A[0], 0
+	for i := 1; i < len(A); i++ {
+		res0 := A[i] - i + max
+		if res0 > res {
+			res = res0
+		}
+
+		v := A[i] + i
+		if v > max {
+			max = v
+		}
+	}
+
+	return res
 }

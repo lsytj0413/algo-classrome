@@ -12,21 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0672
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
+func flipLights(n int, m int) int {
+	switch {
+	case m == 0:
+		return 1
+	case n == 1:
+		return 2
+	case n == 2:
+		if m == 1 {
+			return 3
+		}
+		return 4
+	case m == 1:
+		return 4
+	case m == 2:
+		return 7
+	default:
+		return 8
 	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
-	}
-
-	return
 }

@@ -12,21 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p1029
 
 import (
-	"math"
+	"sort"
 )
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+func twoCitySchedCost(costs [][]int) int {
+	sort.Slice(costs, func(i int, j int) bool {
+		return (costs[i][0] - costs[i][1]) < (costs[j][0] - costs[j][1])
+	})
+
+	cost := 0
+	for i := 0; i < len(costs)/2; i++ {
+		cost += costs[i][0]
 	}
 
-	return
+	for i := len(costs) / 2; i < len(costs); i++ {
+		cost += costs[i][1]
+	}
+
+	return cost
 }

@@ -12,21 +12,34 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0970
 
 import (
 	"math"
+	"sort"
 )
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+// TODO: optimize
+func powerfulIntegers(x int, y int, bound int) []int {
+	marks := make(map[int]bool)
+	for i := 0; ; i++ {
+		vi := int(math.Pow(float64(x), float64(i)))
+		if vi > bound || (i > 0 && x == 1) {
+			break
+		}
+		for j := 0; ; j++ {
+			v := vi + int(math.Pow(float64(y), float64(j)))
+			if v > bound || (j > 0 && y == 1) {
+				break
+			}
+			marks[v] = true
+		}
 	}
 
-	return
+	r := make([]int, 0, len(marks))
+	for k := range marks {
+		r = append(r, k)
+	}
+	sort.Ints(r)
+	return r
 }

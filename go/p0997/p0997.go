@@ -12,21 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0997
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+// TODO: 图算法?
+func findJudge(N int, trust [][]int) int {
+	marks, people := make(map[int]bool, N), (N*(N+1))>>1
+	for _, v := range trust {
+		if !marks[v[0]] {
+			people -= v[0]
+			marks[v[0]] = true
+		}
 	}
 
-	return
+	marks = make(map[int]bool, N)
+	for _, pair := range trust {
+		if pair[1] == people {
+			marks[pair[0]] = true
+		}
+	}
+
+	if len(marks) == N-1 {
+		return people
+	}
+
+	return -1
 }

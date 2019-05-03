@@ -12,21 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p1003
 
-import (
-	"math"
-)
+import "strings"
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
-	}
-
-	return
+func isValid(S string) bool {
+	S = strings.Replace(S, "abc", "", -1)
+	S = strings.Replace(S, "abc", "", -1)
+	S = strings.Replace(S, "abc", "", -1)
+	return S == ""
 }

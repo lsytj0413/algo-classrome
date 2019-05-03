@@ -12,21 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0942
 
-import (
-	"math"
-)
+func diStringMatch(S string) []int {
+	min, max := 0, len(S)
+	r := make([]int, len(S)+1)
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
+	for i := 0; i < len(S); i++ {
+		switch S[i] {
+		case 'I':
+			r[i] = min
+			min++
+		case 'D':
+			r[i] = max
+			max--
+		}
 	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
-	}
+	r[len(r)-1] = min
 
-	return
+	return r
 }

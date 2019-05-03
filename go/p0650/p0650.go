@@ -12,21 +12,28 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0650
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+// TODO: 因式分解
+func minSteps(n int) int {
+	dp := make([]int, n+1)
+	for i := 2; i <= n; i++ {
+		dp[i] = i
 	}
 
-	return
+	_min := func(x int, y int) int {
+		if x < y {
+			return x
+		}
+		return y
+	}
+	for i := 6; i <= n; i++ {
+		for j := i / 2; j >= 2; j-- {
+			if i%j == 0 {
+				dp[i] = _min(dp[i], dp[j]+i/j)
+			}
+		}
+	}
+
+	return dp[n]
 }

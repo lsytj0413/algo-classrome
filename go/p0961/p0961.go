@@ -12,21 +12,23 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0961
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+func repeatedNTimes(A []int) int {
+	for i := 0; i < len(A)-1; i++ {
+		if A[i] == A[i+1] {
+			return A[i]
+		}
 	}
 
-	return
+	for i := 2; i < len(A); i++ {
+		if A[i] == A[0] {
+			return A[0]
+		}
+		if A[i] == A[1] {
+			return A[1]
+		}
+	}
+
+	return A[0]
 }

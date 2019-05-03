@@ -12,21 +12,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0925
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
+// TODO: optimize the code
+func isLongPressedName(name string, typed string) bool {
+	if len(typed) == 0 {
+		return len(name) == 0
 	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+	if len(name) == 0 {
+		return false
 	}
 
-	return
+	i, j := 0, 0
+	for i < len(name) && j < len(typed) {
+		if name[i] == typed[j] {
+			i++
+			j++
+			continue
+		}
+
+		if j == 0 || typed[j] != typed[j-1] {
+			return false
+		}
+		j++
+	}
+
+	if i != len(name) {
+		return false
+	}
+
+	for j < len(typed) {
+		if j > 0 {
+			if typed[j] != typed[j-1] {
+				return false
+			}
+		}
+
+		j++
+	}
+	return true
 }

@@ -12,21 +12,35 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0948
 
 import (
-	"math"
+	"sort"
 )
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+func bagOfTokensScore(tokens []int, P int) int {
+	sort.Ints(tokens)
+	res, now := 0, 0
+	i, j := 0, len(tokens)-1
+
+	for i <= j {
+		if P >= tokens[i] {
+			now++
+			if now > res {
+				res = now
+			}
+			P -= tokens[i]
+			i++
+			continue
+		}
+		if now <= 0 {
+			break
+		}
+
+		now--
+		P += tokens[j]
+		j--
 	}
 
-	return
+	return res
 }

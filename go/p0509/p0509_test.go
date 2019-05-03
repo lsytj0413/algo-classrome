@@ -12,21 +12,45 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0509
 
 import (
-	"math"
+	"testing"
+
+	"github.com/stretchr/testify/suite"
 )
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
-	}
+type p0509TestSuite struct {
+	suite.Suite
+}
 
-	return
+type result struct {
+	arg1   int
+	target int
+}
+
+var values = []result{
+	{
+		arg1:   2,
+		target: 1,
+	},
+	{
+		arg1:   3,
+		target: 2,
+	},
+	{
+		arg1:   4,
+		target: 3,
+	},
+}
+
+func (s *p0509TestSuite) Test() {
+	for _, v := range values {
+		s.Equal(v.target, fib(v.arg1))
+	}
+}
+
+func TestP0509TestSuite(t *testing.T) {
+	s := &p0509TestSuite{}
+	suite.Run(t, s)
 }

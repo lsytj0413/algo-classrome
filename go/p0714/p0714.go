@@ -12,21 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0714
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
+func maxProfit(prices []int, fee int) int {
+	if len(prices) < 2 {
 		return 0
 	}
 
-	return
+	dp1, dp2 := make([]int, len(prices)), make([]int, len(prices))
+	dp1[0] = 0 - prices[0]
+
+	_max := func(x int, y int) int {
+		if x < y {
+			return y
+		}
+		return x
+	}
+	for i := 1; i < len(prices); i++ {
+		dp1[i] = _max(dp1[i-1], dp2[i-1]-prices[i])
+		dp2[i] = _max(dp2[i-1], dp1[i-1]+prices[i]-fee)
+	}
+	return dp2[len(prices)-1]
 }

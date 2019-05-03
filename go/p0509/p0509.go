@@ -12,21 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0509
 
-import (
-	"math"
-)
-
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
-	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
+func fib(N int) int {
+	if N < 2 {
+		return N
 	}
 
-	return
+	v1, v2 := 0, 1
+	for N >= 2 {
+		v1, v2 = v2, v1+v2
+		N--
+	}
+	return v2
 }

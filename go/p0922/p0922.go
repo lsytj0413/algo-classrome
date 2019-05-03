@@ -12,21 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-package p0007
+package p0922
 
-import (
-	"math"
-)
+func sortArrayByParityII(A []int) []int {
+	i, j := 0, len(A)-1
+	for {
+		for i < len(A) && A[i]&0x01 == 0 {
+			i += 2
+		}
+		for j >= 0 && A[j]&0x01 == 1 {
+			j -= 2
+		}
+		if i >= len(A) || j < 0 {
+			break
+		}
 
-func reverse(x int) (num int) {
-	for x != 0 {
-		num = num*10 + x%10
-		x = x / 10
+		A[i], A[j] = A[j], A[i]
 	}
-	// 使用 math 包中定义好的最大最小值
-	if num > math.MaxInt32 || num < math.MinInt32 {
-		return 0
-	}
-
-	return
+	return A
 }
